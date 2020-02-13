@@ -1,11 +1,15 @@
 node {
 
+ deleteDir()
+
  stage('Checkout') {
-    dir('saas-ui'){
-        checkout scm
-    }
+    checkout scm
  }
 
+ stage('Docker run tests'){
+     sh 'docker build -t checks:latest .'
+     sh 'docker run --rm -d -w /work -v $(pwd):/work checks:latest /usr/local/bin/entrypoint.sh src/main/java'
+ }
  stage('Static code analysis') {
   // sh "${mvnHome}/bin/mvn package -DskipTests -Dmaven.test.failure.ignore=false -Dsurefire.skip=true -Dmaven.compile.fork=true -Dmaven.javadoc.skip=true"
 
