@@ -24,11 +24,13 @@ fi
 
 # pmd java
 echo "Running PMD"
-/usr/local/lib/pmd/bin/run.sh pmd -d  ${SRC_DIR} -f xml -rulesets java-quickstart -l java -r pmd.xml
+mkdir pmd
+/usr/local/lib/pmd/bin/run.sh pmd -d  ${SRC_DIR} -f xml -rulesets java-quickstart -l java -r pmd\pmd.xml
 
 # checkstyle
 echo "Running Checkstyle"
-java -jar /usr/local/lib/checkstyle.jar ${SRC_DIR} -f xml -c /google_checks.xml -o checkstyle-result.xml
+mkdir checkstyle-result
+java -jar /usr/local/lib/checkstyle.jar ${SRC_DIR} -f xml -c /google_checks.xml -o checkstyle-result\checkstyle-result.xml
 #echo "Convertin Checkstyle xml to html report using xsl"
 #xsltproc -o cs-report.xml checkstyle-frames.xsl ${CHECK_STYLE_REPORT_FILE}.html
 
