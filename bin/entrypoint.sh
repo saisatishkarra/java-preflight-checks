@@ -26,15 +26,16 @@ fi
 
 # pmd java
 echo "Running PMD"
-/usr/local/lib/pmd/bin/run.sh pmd -d  ${SRC_DIR} -f html -rulesets java-quickstart -l java -r ${PMD_REPORT_FILE}
+/usr/local/lib/pmd/bin/run.sh pmd -d  ${SRC_DIR} -f html -rulesets java-quickstart -l java -r ${PMD_REPORT_FILE}.html
 
 # checkstyle
 echo "Running Checkstyle"
-java -jar /usr/local/lib/checkstyle.jar ${SRC_DIR} -f xml -c /google_checks.xml -o ${CHECK_STYLE_REPORT_FILE}
-
+java -jar /usr/local/lib/checkstyle.jar ${SRC_DIR} -f xml -c /google_checks.xml -o cs-report.xml
+#echo "Convertin Checkstyle xml to html report using xsl"
+#xsltproc -o cs-report.xml checkstyle-frames.xsl ${CHECK_STYLE_REPORT_FILE}.html
 
 
 # Code Coverage with OpenClover
-echo "Running OpenClover Code Coverage"
-java -jar /usr/local/lib/openclover.jar
+# echo "Running OpenClover Code Coverage"
+# java -jar /usr/local/lib/openclover.jar
 
