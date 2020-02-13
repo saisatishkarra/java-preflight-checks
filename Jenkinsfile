@@ -1,13 +1,10 @@
 node {
- deleteDir()
- 
-//  stage('Merge') {
-//   sh "git init"
-//   sh "git fetch --no-tags --progress git@git:group/reponame.git +refs/heads/*:refs/remotes/origin/* --depth=200"
-//   sh "git checkout origin/${env.BRANCH_name}"
-//   sh "git merge origin/${env.sourceBranch}"
-//   sh "git log --graph --abbrev-commit --max-count=10"
-//  }
+
+ stage('Checkout') {
+    dir('saas-ui'){
+        checkout scm
+    }
+ }
 
  stage('Static code analysis') {
   // sh "${mvnHome}/bin/mvn package -DskipTests -Dmaven.test.failure.ignore=false -Dsurefire.skip=true -Dmaven.compile.fork=true -Dmaven.javadoc.skip=true"
@@ -27,9 +24,9 @@ node {
     createSingleFileComments: true, 
     commentOnlyChangedContent: true, 
     commentOnlyChangedFiles: true,
-    minSeverity: 'INFO',
+    minSeverity: 'ERROR',
     maxNumberOfViolations: 99999,
-    keepOldComments: false,
+    keepOldComments: true,
  
     commentTemplate: """
     **Reporter**: {{violation.reporter}}{{#violation.rule}}
