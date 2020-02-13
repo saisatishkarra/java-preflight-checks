@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker run -it -v $(pwd)/ui:/ui -p 4200:4200 node:8 /bin/bash
