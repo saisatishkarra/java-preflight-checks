@@ -5,10 +5,9 @@ ARG TARGET_SRC_DIR
 ENV INSTALL_DIR /usr/local/lib
 ENV CHECKSTYLE_VERSION 8.21
 ENV PMD_VERSION 6.15.0
-ENV OPENCLOVER_VERSION=4.4.1
 
 # Install curl
-RUN apk add bash curl
+RUN apk add bash curl libxslt
 
 # Install checkstyle
 RUN curl -L -o ${INSTALL_DIR}/checkstyle.jar https://github.com/checkstyle/checkstyle/releases/download/checkstyle-${CHECKSTYLE_VERSION}/checkstyle-${CHECKSTYLE_VERSION}-all.jar
@@ -25,6 +24,10 @@ RUN cd ${INSTALL_DIR} && \
 # COPY ./bin/ /usr/local/bin/
 
 COPY ./bin/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY ./bin/checkstyle-frames.xsl /usr/local/bin/checkstyle-frames.xsl
+
 RUN chmod +x /usr/local/bin/*
 
+WORKDIR /work
 CMD ["/usr/local/bin/entrypoint.sh"]
+
