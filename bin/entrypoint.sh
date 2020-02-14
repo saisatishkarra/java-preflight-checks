@@ -30,7 +30,7 @@ mkdir pmd
 # checkstyle
 echo "Running Checkstyle"
 mkdir checkstyle-result
-java -jar /usr/local/lib/checkstyle.jar ${SRC_DIR} -f xml -c /google_checks.xml -o checkstyle-result/checkstyle-result.xml
+java -jar /usr/local/lib/checkstyle.jar ${SRC_DIR} -f xml -c /sun_checks.xml -o checkstyle-result/checkstyle-result.xml
 #echo "Convertin Checkstyle xml to html report using xsl"
 #xsltproc -o cs-report.xml checkstyle-frames.xsl ${CHECK_STYLE_REPORT_FILE}.html
 
